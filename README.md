@@ -7,7 +7,7 @@ Creacion de una apliacion de asistencia financiera para la materia Desarrollo y 
 ## Documentación 📄
 
 - [Tablero](https://linktodocumentation)
-- [Mockups](https://linktodocumentation)
+- [Mockups](https://www.figma.com/file/tvGvNevpL295iNRVxo7RS9/Untitled?type=design&t=FZ05QKwoJEpJiXWD-6)
 - [Documento - Fase 1](https://docs.google.com/document/d/1XoLYGCUKM53vAE7SHPO45GK9WXEkj7LcDowHuZzUvNI/edit)
 
 ## Tecnologias utilizadas 💻
