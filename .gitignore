@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# Exclude .DS_Store files in all child directories
+**/.DS_Store
+
 # testing
 /coverage
 
