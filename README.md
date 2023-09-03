@@ -7,10 +7,8 @@ Creacion de una apliacion de asistencia financiera para la materia Desarrollo y 
 ## Documentación 📄
 
 - [Tablero](https://linktodocumentation)
-- [Manual de usuario](https://linktodocumentation)
 - [Mockups](https://linktodocumentation)
-- [Video de funcionamiento](https://linktodocumentation)
-
+- [Documento - Fase 1](https://docs.google.com/document/d/1XoLYGCUKM53vAE7SHPO45GK9WXEkj7LcDowHuZzUvNI/edit)
 
 ## Tecnologias utilizadas 💻
 
@@ -66,14 +64,17 @@ Ejecutar el proyecto
   Dar click en el botón de play con lo cual los endpoint a usar en la aplicación estaran disponibles.
 ```
 
+
 ## License
 
-[Creative Commons Zero v1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/deed.es)
+[Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es)
 
 
 ## Autores 👨‍💻
 
-- [@juankparanoid1 - Juan Carlos Calderón López](https://github.com/juankparanoid1)
-- [@jpchavez30 - Carlos Javier Perez Chavez](https://github.com/jpchavez30)
-- [@MarcoAlberto - Marco Alberto Antonio Acosta](https://github.com/MarcoAlberto)
+- [@juankparanoid1 - Juan Carlos Calderón López G04T](https://github.com/juankparanoid1)
+- [@jpchavez30 - Carlos Javier Perez Chavez G04T](https://github.com/jpchavez30)
+- [@MarcoAlberto - Marco Alberto Antonio Acosta G04T](https://github.com/MarcoAlberto)
+- [@richardMembreno - Ricardo Enrique Membreño Rivera G04T](https://github.com/richardMembreno)
+- [@ - Bruno Daniel Pablo Segura](https://linktodocumentation)
 
