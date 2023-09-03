@@ -76,5 +76,5 @@ Ejecutar el proyecto
 - [@jpchavez30 - Carlos Javier Perez Chavez G04T](https://github.com/jpchavez30)
 - [@MarcoAlberto - Marco Alberto Antonio Acosta G04T](https://github.com/MarcoAlberto)
 - [@richardMembreno - Ricardo Enrique Membreño Rivera G04T](https://github.com/richardMembreno)
-- [@ - Bruno Daniel Pablo Segura](https://linktodocumentation)
+- [@bruno145 - Bruno Daniel Pablo Segura](https://github.com/bruno145)
 
