@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "finance-path-app",
+    "slug": "finance-path-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "finance-path-app"
+}
