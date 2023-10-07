@@ -7,16 +7,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Home from './app/screens/home/Home';
 import Login from './app/screens/login/Login';
 import Screens from './app/helpers/Screens';
-import BootSplash from "react-native-bootsplash";
 
 export default function App() {
   const RootStack = createNativeStackNavigator();
   return (
     <SafeAreaProvider>
       <StatusBar style="dark" />
-      <NavigationContainer onReady={() => {
-        BootSplash.hide()
-      }}>
+      <NavigationContainer>
         <RootStack.Navigator>
           <RootStack.Screen name={Screens.LOGIN} options={{ headerShown: false }} component={Login}></RootStack.Screen>
           <RootStack.Screen name={Screens.HOME} options={{ headerShown: false, gestureEnabled: false }} component={Home} />

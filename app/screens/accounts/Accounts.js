@@ -5,11 +5,18 @@ import AccountItem from '../../components/AccountItem/AccountItem';
 const Accounts = () => {
   return (
     <>
-      <AccountItem></AccountItem>
+      <View style={styles.container}>
+        <AccountItem></AccountItem>
+      </View> 
     </>
   )
 }
 
 export default Accounts
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'lightgrey',
+  }
+})
