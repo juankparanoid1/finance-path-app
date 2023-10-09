@@ -61,10 +61,10 @@ const HomeRoutes = ({ isBottomNavigationBar = true }) => {
                 isBottomNavigationBar ?
                     (
                         <>
-                            <Tab.Screen name={Screens.ACCOUNTS} options={{ headerTitleStyle: styles.headerTitleStyle }} component={Accounts}></Tab.Screen>
-                            <Tab.Screen name={Screens.TRANSACTIONS} options={{ headerTitleStyle: styles.headerTitleStyle }} component={Transactions}></Tab.Screen>
-                            <Tab.Screen name={Screens.CATEGORIES} options={{ headerTitleStyle: styles.headerTitleStyle }} component={Categories}></Tab.Screen>
-                            <Tab.Screen name={Screens.GOALS} options={{ headerTitleStyle: styles.headerTitleStyle }} component={Goals}></Tab.Screen>
+                            <Tab.Screen name={Screens.ACCOUNTS} options={{ headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center' }} component={Accounts}></Tab.Screen>
+                            <Tab.Screen name={Screens.TRANSACTIONS} options={{ headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center', headerTitle: 'Agregar Transacción' }} component={Transactions}></Tab.Screen>
+                            <Tab.Screen name={Screens.CATEGORIES} options={{ headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center' }} component={Categories}></Tab.Screen>
+                            <Tab.Screen name={Screens.GOALS} options={{ headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center' }} component={Goals}></Tab.Screen>
                         </>
                     )
                     :
@@ -88,11 +88,12 @@ const styles = StyleSheet.create({
     },
     headerTitleStyle: {
         fontSize: 24,
-        fontWeight: '600'
+        fontWeight: '600',
+        color: Colors.font,
     },
     tabBarLabelStyle: {
         fontSize: 13,
         fontWeight: '600',
-        color: Colors.primary
+        color: Colors.primary,
     }
 })
