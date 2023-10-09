@@ -11,6 +11,7 @@ Creacion de una apliacion de asistencia financiera para la materia Desarrollo y 
 - [Documento - Fase 1](https://docs.google.com/document/d/1XoLYGCUKM53vAE7SHPO45GK9WXEkj7LcDowHuZzUvNI/edit)
 - [Manual de Usuario](https://www.canva.com/design/DAFvg1irkSE/joAlUg8NjSNHTyZ7gGQ2ZQ/edit?utm_content=DAFvg1irkSE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [Manual de Técnico](https://www.canva.com/design/DAFvg7OiIWo/m6zCvuhvQz5gyJc4uX2GoQ/edit?utm_content=DAFvg7OiIWo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- [Video de funcionamiento](https://drive.google.com/file/d/1xSANqyT9KcS9UVN-AduzMUNm2XwG3lQT/view?usp=sharing)
 
 ## Tecnologias utilizadas 💻
 
