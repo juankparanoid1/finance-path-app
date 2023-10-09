@@ -40,12 +40,13 @@ const styleLogin = StyleSheet.create({
         color: Colors.primary,
     },
     btnContainer: {
-        flex: 1,
+        paddingTop: 35,
+        // flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
     btn: {
-        width: 132,
+        width: 200,
         height: 48,
         backgroundColor: Colors.primary,
         alignItems: 'center',

@@ -7,6 +7,9 @@ import AccountForm from './AccountForm'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
 import Screens from '../../helpers/Screens'
+import {
+  GoogleSignin,
+} from '@react-native-google-signin/google-signin';
 
 const AccountItem = () => {
   const [cuentas, setCuentas] = useState([]);
@@ -49,11 +52,23 @@ const AccountItem = () => {
     }
   }
 
+  signOut = async () => {
+    try {
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+        // setloggedIn(false);
+        // setuserInfo([]);
+        navigation.navigate(Screens.LOGIN)
+    } catch (error) {
+        console.error(error);
+    }
+};
+
   return (
       <TouchableWithoutFeedback onPress={() => cerrarTeclado() }>
       <View style={styles.contenedor}>
         <View style={styles.top}>
-          <TouchableOpacity style={styles.btnBack} onPress={() => navigation.navigate(Screens.LOGIN)}>
+          <TouchableOpacity style={styles.btnBack} onPress={() => signOut() }>
             <Icon name={'arrow-back'} size={30} color="#FFF" />
           </TouchableOpacity>
           <View style={styles.viewTitle}>
