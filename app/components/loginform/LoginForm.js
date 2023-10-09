@@ -57,17 +57,6 @@ const LoginForm = () => {
         }
     };
 
-    signOut = async () => {
-        try {
-            await GoogleSignin.revokeAccess();
-            await GoogleSignin.signOut();
-            setloggedIn(false);
-            setuserInfo([]);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     return (
         <KeyboardAvoidingView style={styleLogin.mainContainer} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
             <ScrollView style={styleLogin.container}>
