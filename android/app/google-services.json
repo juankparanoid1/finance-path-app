@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1061120463287",
+    "project_id": "finance-path-app",
+    "storage_bucket": "finance-path-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061120463287:android:782a270f76dcc419555832",
+        "android_client_info": {
+          "package_name": "com.financepathapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061120463287-d8sjas4dr7sa60opksl3t23qpfrh9bo1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.financepathapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1061120463287-uegci7t513fv8p5f7as1p4mmco6gebci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTlTGy8d6Ai4S_0PULCLvTKLXIVWD2QZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061120463287-uegci7t513fv8p5f7as1p4mmco6gebci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
