@@ -12,6 +12,7 @@ import Screens from '../../helpers/Screens'
 import {
   GoogleSignin,
 } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 const AccountItem = () => {
   const [cuentas, setCuentas] = useState([]);
@@ -65,6 +66,7 @@ const AccountItem = () => {
         // setuserInfo([]);
         navigation.navigate(Screens.LOGIN)
       } else {
+        auth().signOut();
         navigation.navigate(Screens.LOGIN)
       }
     } catch (error) {

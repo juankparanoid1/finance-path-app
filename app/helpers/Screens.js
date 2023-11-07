@@ -4,5 +4,8 @@ export default {
     ACCOUNTS: 'Cuentas',
     TRANSACTIONS: 'Transacciones',
     CATEGORIES: 'Categorías',
-    GOALS: 'Metas'
+    GOALS: 'Metas',
+    SIGNIN: 'Registrar',
+    ADDACCOUNT: 'AgregarCuenta',
+    SETTINGS: 'Menu'
 }
