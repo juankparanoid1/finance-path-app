@@ -7,7 +7,7 @@ const Home = () => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
     return () => backHandler.remove();
   }, [])
-  
+
   return (
     <HomeRoutes></HomeRoutes>
   )
