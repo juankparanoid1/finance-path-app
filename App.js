@@ -11,6 +11,7 @@ import BootSplash from "react-native-bootsplash";
 import auth from '@react-native-firebase/auth';
 import SignIn from './app/screens/signin/SignIn';
 import AddAccount from './app/screens/addaccount/AddAccount';
+import AddCategories from './app/screens/addcategories/AddCategories';
 
 export default function App() {
   const RootStack = createNativeStackNavigator();
@@ -47,6 +48,10 @@ export default function App() {
                   headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center',
                   headerTitle: 'Agregar Cuenta'
                 }} component={AddAccount} />
+                <RootStack.Screen name={Screens.ADDCATEGORIES} options={{
+                  headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center',
+                  headerTitle: 'Agregar Categorias'
+                }} component={AddCategories} />
               </>
               :
               <>
