@@ -5,6 +5,7 @@ import { useFirebaseCatalog } from '../../hooks/useFirebaseCatalog';
 import { Picker } from '@react-native-picker/picker';
 import useDocRefFromArray from '../../hooks/useDocRefFromArray';
 import firestore from '@react-native-firebase/firestore';
+import { getUser } from '../../service/AuthService';
 
 const AccountForm = () => {
 
@@ -64,6 +65,8 @@ const AccountForm = () => {
             addAccountForm.type = accountTypeRef;
             const bankRef = await firestore().collection('banks').doc(useDocRefFromArray(banksList, addAccountForm.bank));
             addAccountForm.bank = bankRef;
+            const userInfo = await getUser();
+            addAccountForm.user = userInfo.uid;
             const createAccount = firestore().collection('accounts').add(addAccountForm);
             if (createAccount) {
                 Alert.alert('Exito', 'Cuenta registrada', [{

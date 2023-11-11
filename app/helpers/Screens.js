@@ -9,4 +9,5 @@ export default {
     ADDACCOUNT: 'AgregarCuenta',
     SETTINGS: 'Menu',
     ADDCATEGORIES: 'AgregarCategoria',
+    ADDGOALS: 'AgregarGoals',
 }

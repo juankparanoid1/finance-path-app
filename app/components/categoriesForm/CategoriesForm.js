@@ -2,8 +2,8 @@ import { Alert, StyleSheet, KeyboardAvoidingView, Platform, Text, TextInput, Tou
 import React, { useState } from 'react'
 import { styleCategoriesForm } from './Style';
 import { Picker } from '@react-native-picker/picker';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import firestore from '@react-native-firebase/firestore';
+import { getUser } from '../../service/AuthService';
 
 const CategoriesForm = () => {
     const initialFormState = () => {
@@ -35,7 +35,7 @@ const CategoriesForm = () => {
         })
     }
 
-    const saveCategoriesFormForm = () => {
+    const saveCategoriesFormForm = async () => {
         try {
             const isFormEmptyOrNull = Object.values(addCategoriesForm).some(value => value === '' || value === null);
             if (isFormEmptyOrNull) {
@@ -44,6 +44,8 @@ const CategoriesForm = () => {
                 }]);
                 return;
             }
+            const userInfo = await getUser();
+            addCategoriesForm.user = userInfo.uid;
             const createCategorie = firestore().collection('categories').add(addCategoriesForm);
             if (createCategorie) {
                 Alert.alert('Exito', 'Categoria registrada', [{

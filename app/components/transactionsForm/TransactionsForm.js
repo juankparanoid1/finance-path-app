@@ -89,6 +89,8 @@ const TransactionsForm = () => {
       addTransactionForm.category = categoryRef
       addTransactionForm.transactionType = transactiontypeRef;
       addTransactionForm.bank = bankRef;
+      const userInfo = await getUser();
+      addTransactionForm.user = userInfo.uid;
       const createTransaction = firestore().collection('transactions').add(addTransactionForm);
       if (createTransaction) {
         Alert.alert('Exito', 'Transacción registrada', [{

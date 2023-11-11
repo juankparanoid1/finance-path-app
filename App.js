@@ -12,6 +12,8 @@ import auth from '@react-native-firebase/auth';
 import SignIn from './app/screens/signin/SignIn';
 import AddAccount from './app/screens/addaccount/AddAccount';
 import AddCategories from './app/screens/addcategories/AddCategories';
+import { getUser, saveUser } from './app/service/AuthService';
+import AddGoals from './app/screens/addgoals/AddGoals';
 
 export default function App() {
   const RootStack = createNativeStackNavigator();
@@ -22,10 +24,22 @@ export default function App() {
 
   function onAuthStateChanged(user) {
     setUser(user);
+    saveUserInfo(user);
     if (initializing) {
       setInitializing(false);
     }
-    console.log('user ', user);
+    //console.log('user ', user);
+  }
+
+  const saveUserInfo = async (user) => {
+    try {
+      const userExists = await getUser();
+      if (!userExists) {
+        await saveUser(user);
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -52,6 +66,10 @@ export default function App() {
                   headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center',
                   headerTitle: 'Agregar Categorias'
                 }} component={AddCategories} />
+                <RootStack.Screen name={Screens.ADDGOALS} options={{
+                  headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center',
+                  headerTitle: 'Agregar metas'
+                }} component={AddGoals} />
               </>
               :
               <>
