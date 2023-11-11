@@ -4,6 +4,7 @@ import firebase from '@react-native-firebase/firestore';
 import Spacing from '../helpers/Spacing';
 import { useFocusEffect } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
+import { getUser } from '../service/AuthService';
 
 const CategoriesByType = ({ route }) => {
     const { type } = route.params;
@@ -34,8 +35,10 @@ const CategoriesByType = ({ route }) => {
     const loadCategories = async () => {
         try {
             setIsLoading(true);
+            const userInfo = await getUser();
             const querySnapshot = await firebase().collection('categories')
                 .where('type', '==', type)
+                .where('user', '==', userInfo.uid)
                 .get();
             const itemsPromises = querySnapshot.docs.map(async (categories) => {
                 return {
@@ -60,10 +63,10 @@ const CategoriesByType = ({ route }) => {
         setIsRefresh(false)
     }
 
-    const toggleExpand= (index) => {
+    const toggleExpand = (index) => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setExpanded((prevIndex) => (prevIndex === index ? -1 : index));
-      }
+    }
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
@@ -81,6 +84,11 @@ const CategoriesByType = ({ route }) => {
                                     tintColor="#100D40"
                                 />
                             }
+                            ListEmptyComponent={() =>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text>No data disponible</Text>
+                                </View>
+                            }
                             renderItem={({ item, index, separators }) => (
                                 <View>
                                     <TouchableOpacity ref={this.accordian} style={styles.row} onPress={() => toggleExpand(index)}>
@@ -91,7 +99,7 @@ const CategoriesByType = ({ route }) => {
                                     {
                                         expanded === index &&
                                         <View style={styles.child}>
-                                            <Text style={{fontSize: 14, lineHeight: 14, fontWeight: '400', color: '#82909D'}}>{item.description}</Text>
+                                            <Text style={{ fontSize: 14, lineHeight: 14, fontWeight: '400', color: '#82909D' }}>{item.description}</Text>
                                         </View>
                                     }
 
@@ -112,26 +120,26 @@ const CategoriesByType = ({ route }) => {
 export default CategoriesByType
 
 const styles = StyleSheet.create({
-    title:{
+    title: {
         fontSize: 16,
-        fontWeight:'600',
+        fontWeight: '600',
         color: '#100D40',
     },
-    row:{
+    row: {
         flexDirection: 'row',
-        justifyContent:'space-between',
-        height:56,
+        justifyContent: 'space-between',
+        height: 56,
         paddingHorizontal: 15,
-        alignItems:'center',
+        alignItems: 'center',
         backgroundColor: '#FFFFFF',
     },
-    parentHr:{
-        height:1,
+    parentHr: {
+        height: 1,
         color: '#100D40',
-        width:'100%'
+        width: '100%'
     },
-    child:{
+    child: {
         backgroundColor: '#FFFFFF',
-        padding:16,
+        padding: 16,
     }
 })
