@@ -68,8 +68,14 @@ const TransactionsForm = () => {
 
   const saveAddTransactionForm = async () => {
     try {
-      const isFormEmptyOrNull = Object.values(initialFormState()).some(value => value === '' || value === null);
-      if (!isFormEmptyOrNull) {
+      if(addTransactionForm.amount === 0){
+        Alert.alert('Verificar', 'El monto no debe ser 0', [{
+          text: 'Ok',
+        }]);
+        return;
+      }
+      const isFormEmptyOrNull = Object.values(addTransactionForm).some(value => value === '' || value === null);
+      if (isFormEmptyOrNull) {
         Alert.alert('Verificar', 'Revise la información', [{
           text: 'Ok',
         }]);

@@ -35,7 +35,6 @@ const AccountList = () => {
         setIsRefresh(true);
         await loadAccounts();
         setIsRefresh(false)
-
     }
 
     return (

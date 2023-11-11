@@ -38,10 +38,10 @@ const AccountForm = () => {
 
     const saveAccountForm = async () => {
         try {
-            const isFormEmptyOrNull = Object.entries(initialFormState()).some(
+            const isFormEmptyOrNull = Object.entries(addAccountForm).some(
                 ([key, value]) => key !== 'bank' && (value === '' || value === null)
             );
-            if (!isFormEmptyOrNull || addAccountForm.amount === 0) {
+            if (isFormEmptyOrNull || addAccountForm.amount === 0) {
                 Alert.alert('Verificar', 'Revise la información', [{
                     text: 'Ok',
                 }]);

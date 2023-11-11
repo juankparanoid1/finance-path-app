@@ -7,5 +7,6 @@ export default {
     GOALS: 'Metas',
     SIGNIN: 'Registrar',
     ADDACCOUNT: 'AgregarCuenta',
-    SETTINGS: 'Menu'
+    SETTINGS: 'Menu',
+    ADDCATEGORIES: 'AgregarCategoria',
 }
