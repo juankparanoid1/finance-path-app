@@ -8,6 +8,7 @@ import Home from './app/screens/home/Home';
 import Login from './app/screens/login/Login';
 import Screens from './app/helpers/Screens';
 import BootSplash from "react-native-bootsplash";
+import TransactionsForm from './app/components/transactionsForm/TransactionsForm';
 
 export default function App() {
   const RootStack = createNativeStackNavigator();
@@ -20,6 +21,7 @@ export default function App() {
         <RootStack.Navigator>
           <RootStack.Screen name={Screens.LOGIN} options={{ headerShown: false }} component={Login}></RootStack.Screen>
           <RootStack.Screen name={Screens.HOME} options={{ headerShown: false, gestureEnabled: false }} component={Home} />
+          <RootStack.Screen name={Screens.ADDTRANSACTION} options={{ headerShown: false, gestureEnabled: false }} component={TransactionsForm} />
         </RootStack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

@@ -9,14 +9,13 @@ export const stylesTransactionForm = StyleSheet.create({
     },
     containerAmmount: {
       flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center'
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     containerAmmountLabel: {
-      fontSize: 14,
+      fontSize: 25,
       fontWeight: '400',
-      color: '#999999'
+      color: 'black'
     },
     containerAmmountInfo: {
       fontSize: 48,
