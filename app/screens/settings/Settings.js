@@ -8,6 +8,7 @@ import {
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native'
 import Screens from '../../helpers/Screens';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Settings = () => {
     const insets = useSafeAreaInsets();
@@ -17,7 +18,6 @@ const Settings = () => {
         try {
             //verify if the user signin with google
             const signIn = await GoogleSignin.isSignedIn();
-            console.log(signIn)
             if (signIn) {
                 await GoogleSignin.revokeAccess();
                 await GoogleSignin.signOut();
@@ -30,6 +30,8 @@ const Settings = () => {
             }
         } catch (error) {
             console.error(error);
+        }finally{
+            await AsyncStorage.removeItem('user')
         }
     };
 

@@ -5,7 +5,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { stylesTransactionForm } from './Style';
 import firestore from '@react-native-firebase/firestore';
 import { useFirebaseCatalog } from '../../hooks/useFirebaseCatalog';
-import useDocRefFromArray from '../../hooks/useDocRefFromArray';
+import {useDocRefFromArray, useDocRefFromArrayName } from '../../hooks/useDocRefFromArray';
+import { getUser } from '../../service/AuthService';
 
 const TransactionsForm = () => {
 
@@ -31,6 +32,7 @@ const TransactionsForm = () => {
   const transactionsTypeData = useFirebaseCatalog('transactiontype');
   const categoriesData = useFirebaseCatalog('categories');
   const banksData = useFirebaseCatalog('banks');
+  const [user, setUser] = useState(null);
 
   const renderTransactionsPicker = () => {
     return transactionsType.map((transaction, index) => {
@@ -40,7 +42,9 @@ const TransactionsForm = () => {
 
   const renderCategoriesPicker = () => {
     return categoriesList.map((category, index) => {
-      return <Picker.Item key={index} label={category.name} value={category.id} />
+      if(category.user === user.uid){
+        return <Picker.Item key={index} label={category.name} value={category.name} />
+      }
     })
   }
 
@@ -82,7 +86,7 @@ const TransactionsForm = () => {
         return;
       }
       const formatDate = await firestore.Timestamp.fromDate(addTransactionForm.transactionDate);
-      const categoryRef = await firestore().collection('categories').doc(useDocRefFromArray(categoriesList, addTransactionForm.category));
+      const categoryRef = await firestore().collection('categories').doc(useDocRefFromArrayName(categoriesList, addTransactionForm.category));
       const transactiontypeRef = await firestore().collection('transactiontype').doc(useDocRefFromArray(transactionsType, addTransactionForm.transactionType));
       const bankRef = await firestore().collection('banks').doc(useDocRefFromArray(banksList, addTransactionForm.bank));
       addTransactionForm.transactionDate = formatDate;
@@ -124,6 +128,20 @@ const TransactionsForm = () => {
     setCategoriesList(categoriesData.data);
     setBanksList(banksData.data);
   }, [transactionsTypeData.data, categoriesData.data, banksData.data])
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const fetchedUser = await getUser(); // Assuming getUser() returns a promise
+        setUser(fetchedUser);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        // Handle error
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
 
   return (

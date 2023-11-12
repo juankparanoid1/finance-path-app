@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import AccountForm from '../../components/accountform/AccountForm';
-import AccountItem from '../../components/accountitemn/AccountItem';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AccountList from '../../components/accountlist/AccountList';
 

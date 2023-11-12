@@ -10,4 +10,5 @@ export default {
     SETTINGS: 'Menu',
     ADDCATEGORIES: 'AgregarCategoria',
     ADDGOALS: 'AgregarGoals',
+    ADDTRANSACTIONS: 'AgregarTransacciones',
 }

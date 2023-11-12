@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { stylesAccountForm } from './Style';
 import { useFirebaseCatalog } from '../../hooks/useFirebaseCatalog';
 import { Picker } from '@react-native-picker/picker';
-import useDocRefFromArray from '../../hooks/useDocRefFromArray';
+import {useDocRefFromArray} from '../../hooks/useDocRefFromArray';
 import firestore from '@react-native-firebase/firestore';
 import { getUser } from '../../service/AuthService';
 

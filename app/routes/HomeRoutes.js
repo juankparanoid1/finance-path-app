@@ -85,7 +85,18 @@ const HomeRoutes = ({ isBottomNavigationBar = true }) => {
                                     ),
                                 }}
                                 component={Accounts}></Tab.Screen>
-                            <Tab.Screen name={Screens.TRANSACTIONS} options={{ headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center', headerTitle: 'Agregar Transacción' }} component={Transactions}></Tab.Screen>
+                            <Tab.Screen name={Screens.TRANSACTIONS} options={{ headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center', headerTitle: 'Transacciones',
+                                    headerRight: () => (
+                                        <TouchableOpacity style={{
+                                            marginRight: 10, // Add marginLeft for separation
+                                        }} onPress={() => {
+                                            navigation.navigate(Screens.ADDTRANSACTIONS);
+                                        }}>
+                                            <View style={{ borderWidth: 1.5, borderColor: '#231F20', width: 47, height: 47, borderRadius: 7, justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>
+                                                <Ionicons style={{ paddingHorizontal: 1 }} name={'add-outline'} size={45} color={'#231F20'}></Ionicons>
+                                            </View>
+                                        </TouchableOpacity>
+                                    ), }} component={Transactions}></Tab.Screen>
                             <Tab.Screen name={Screens.CATEGORIES} options={{
                                 headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center',
                                 headerRight: () => (

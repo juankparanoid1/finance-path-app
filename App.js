@@ -14,13 +14,67 @@ import AddAccount from './app/screens/addaccount/AddAccount';
 import AddCategories from './app/screens/addcategories/AddCategories';
 import { getUser, saveUser } from './app/service/AuthService';
 import AddGoals from './app/screens/addgoals/AddGoals';
+import AddTransactions from './app/screens/addtransactions/AddTransactions';
 
 export default function App() {
   const RootStack = createNativeStackNavigator();
 
-
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+
+
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false,
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token,
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            userToken: null,
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      userToken: null,
+    }
+  );
+
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async (data) => {
+        // In a production app, we need to send some data (usually username, password) to server and get a token
+        // We will also need to handle errors if sign in failed
+        // After getting token, we need to persist the token using `SecureStore`
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signUp: async (data) => {
+        // In a production app, we need to send user data to server and get a token
+        // We will also need to handle errors if sign up failed
+        // After getting token, we need to persist the token using `SecureStore`
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+    }),
+    []
+  );
 
   function onAuthStateChanged(user) {
     setUser(user);
@@ -70,6 +124,10 @@ export default function App() {
                   headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center',
                   headerTitle: 'Agregar metas'
                 }} component={AddGoals} />
+                  <RootStack.Screen name={Screens.ADDTRANSACTIONS} options={{
+                  headerTitleStyle: styles.headerTitleStyle, headerTitleAlign: 'center',
+                  headerTitle: 'Agregar transacciones'
+                }} component={AddTransactions} />
               </>
               :
               <>

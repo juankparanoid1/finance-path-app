@@ -1,9 +1,10 @@
-import { Image, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import auth from '@react-native-firebase/auth';
 import styleSignIn from './Style';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
+import Screens from '../../helpers/Screens';
 
 const SignInForm = () => {
 
@@ -24,6 +25,7 @@ const SignInForm = () => {
                 navigation.navigate(Screens.HOME)
             }
         } catch (error) {
+            console.log(error)
             if (error.code === 'auth/email-already-in-use') {
                 Alert.alert('Verificar', 'El correo ya esta siendo usado', [{
                     text: 'Ok',
@@ -32,6 +34,12 @@ const SignInForm = () => {
 
             if (error.code === 'auth/invalid-email') {
                 Alert.alert('Verificar', 'El correo es incorrecto', [{
+                    text: 'Ok',
+                }]);
+            }
+
+            if (error.code === 'auth/weak-password') {
+                Alert.alert('Verificar', 'La contraseña debe tener al menos 6 caracteres', [{
                     text: 'Ok',
                 }]);
             }
