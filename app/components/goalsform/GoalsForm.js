@@ -56,7 +56,6 @@ const GoalsForm = () => {
             addGoalForm.bank = bankRef;
             const userInfo = await getUser();
             addGoalForm.user = userInfo.uid;
-            console.log(addGoalForm);
             const createAccount = firestore().collection('goals').add(addGoalForm);
             if (createAccount) {
                 Alert.alert('Exito', 'Cuenta registrada', [{

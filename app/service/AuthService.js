@@ -21,6 +21,5 @@ export const getUser = async () => {
     } catch (error) {
         console.log(error);
     }
-    console.log('getUser', userInfo.uid)
     return userInfo;
 }

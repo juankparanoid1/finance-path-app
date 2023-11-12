@@ -1,6 +1,9 @@
-const useDocRefFromArray = (array, query) => {
+export const useDocRefFromArray = (array, query) => {
   const foundItem = array.find(item => item.id === query);
   return foundItem ? foundItem.idDoc : null;
 };
 
-export default useDocRefFromArray;
+export const useDocRefFromArrayName = (array, query) => {
+  const foundItem = array.find(item => item.name === query);
+  return foundItem ? foundItem.idDoc : null;
+};
