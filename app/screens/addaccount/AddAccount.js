@@ -1,18 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AccountList from '../../components/accountlist/AccountList';
+import AccountForm from '../../components/accountform/AccountForm';
 
-const Accounts = () => {
+const AddAccount = () => {
   const insets = useSafeAreaInsets();
   return (
     <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
-      <AccountList></AccountList>
+      <AccountForm></AccountForm>
     </View>
   )
 }
 
-export default Accounts
+export default AddAccount
 
 const styles = StyleSheet.create({
   container: {

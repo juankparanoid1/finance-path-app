@@ -1,65 +1,38 @@
-import { KeyboardAvoidingView, Platform, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { Picker } from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { stylesTransactionForm } from './Style';
+import firestore from '@react-native-firebase/firestore';
+import { useFirebaseCatalog } from '../../hooks/useFirebaseCatalog';
+import {useDocRefFromArray, useDocRefFromArrayName } from '../../hooks/useDocRefFromArray';
+import { getUser } from '../../service/AuthService';
 
 const TransactionsForm = () => {
 
-  const [addTransactionForm, setAddTransactionForm] = useState({
-    ammount: 0,
-    transactionDate: null,
-    transactionType: '',
-    categorie: '',
-    account: ''
-  });
+  const initialFormState = () => {
+    return {
+      amount: 0.00,
+      transactionDate: null,
+      transactionType: '',
+      category: '',
+      bank: '',
+    };
+  }
 
+  const [addTransactionForm, setAddTransactionForm] = useState(initialFormState());
   const [date, setDate] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [transactionsType, setTransactionsType] = useState([
-    {
-      id: 1,
-      name: 'Salidas'
-    },
-    {
-      id: 2,
-      name: 'Ahorros'
-    },
-    {
-      id: 3,
-      name: 'Gastos'
-    }
-  ]);
+  const [transactionsType, setTransactionsType] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [banksList, setBanksList] = useState([]);
+  const [textInputValue, setTextInputValue] = useState('0.00');
+  const [isTextInputVisible, setIsTextInputVisible] = useState(false);
 
-  const [categoriesList, setCategoriesList] = useState([
-    {
-      id: 1,
-      name: 'Familia'
-    },
-    {
-      id: 2,
-      name: 'Salario'
-    },
-    {
-      id: 3,
-      name: 'Otros'
-    }
-  ]);
-
-  const [accountsList, setAccountList] = useState([
-    {
-      id: 1,
-      name: 'Ahorro agricola'
-    },
-    {
-      id: 2,
-      name: 'Ahorro Davivienda'
-    },
-    {
-      id: 3,
-      name: 'Credito Cuscatlán'
-    }
-  ]);
+  const transactionsTypeData = useFirebaseCatalog('transactiontype');
+  const categoriesData = useFirebaseCatalog('categories');
+  const banksData = useFirebaseCatalog('banks');
+  const [user, setUser] = useState(null);
 
   const renderTransactionsPicker = () => {
     return transactionsType.map((transaction, index) => {
@@ -69,13 +42,15 @@ const TransactionsForm = () => {
 
   const renderCategoriesPicker = () => {
     return categoriesList.map((category, index) => {
-      return <Picker.Item key={index} label={category.name} value={category.id} />
+      if(category.user === user.uid){
+        return <Picker.Item key={index} label={category.name} value={category.name} />
+      }
     })
   }
 
-  const renderAccountsPicker = () => {
-    return accountsList.map((account, index) => {
-      return <Picker.Item key={index} label={account.name} value={account.id} />
+  const renderBanksPicker = () => {
+    return banksList.map((bank, index) => {
+      return <Picker.Item key={index} label={bank.name} value={bank.id} />
     })
   }
 
@@ -95,16 +70,101 @@ const TransactionsForm = () => {
     hideDatePicker();
   }
 
-  const saveAddTransactionForm = () => {
-    console.log(addTransactionForm);
+  const saveAddTransactionForm = async () => {
+    try {
+      if(addTransactionForm.amount === 0){
+        Alert.alert('Verificar', 'El monto no debe ser 0', [{
+          text: 'Ok',
+        }]);
+        return;
+      }
+      const isFormEmptyOrNull = Object.values(addTransactionForm).some(value => value === '' || value === null);
+      if (isFormEmptyOrNull) {
+        Alert.alert('Verificar', 'Revise la información', [{
+          text: 'Ok',
+        }]);
+        return;
+      }
+      const formatDate = await firestore.Timestamp.fromDate(addTransactionForm.transactionDate);
+      const categoryRef = await firestore().collection('categories').doc(useDocRefFromArrayName(categoriesList, addTransactionForm.category));
+      const transactiontypeRef = await firestore().collection('transactiontype').doc(useDocRefFromArray(transactionsType, addTransactionForm.transactionType));
+      const bankRef = await firestore().collection('banks').doc(useDocRefFromArray(banksList, addTransactionForm.bank));
+      addTransactionForm.transactionDate = formatDate;
+      addTransactionForm.category = categoryRef
+      addTransactionForm.transactionType = transactiontypeRef;
+      addTransactionForm.bank = bankRef;
+      const userInfo = await getUser();
+      addTransactionForm.user = userInfo.uid;
+      const createTransaction = firestore().collection('transactions').add(addTransactionForm);
+      if (createTransaction) {
+        Alert.alert('Exito', 'Transacción registrada', [{
+          text: 'Ok',
+        }]);
+        setAddTransactionForm(initialFormState());
+        initialFormState();
+        setTextInputValue('0.00')
+        setDate('');
+      }
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
+
+  // const getDocRefFromArray = (array, query) => {
+  //   return array?.filter(arr => arr.id === query).idDoc;
+  // }
+
+  const handleToggleTextInput = () => {
+    setIsTextInputVisible(!isTextInputVisible);
+  };
+
+  const handleBlur = () => {
+    setIsTextInputVisible(false);
+  };
+
+  useEffect(() => {
+    setTransactionsType(transactionsTypeData.data);
+    setCategoriesList(categoriesData.data);
+    setBanksList(banksData.data);
+  }, [transactionsTypeData.data, categoriesData.data, banksData.data])
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const fetchedUser = await getUser(); // Assuming getUser() returns a promise
+        setUser(fetchedUser);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        // Handle error
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
       <View style={stylesTransactionForm.container}>
         <View style={stylesTransactionForm.containerAmmount}>
           <Text style={stylesTransactionForm.containerAmmountLabel}>Monto</Text>
-          <Text style={stylesTransactionForm.containerAmmountInfo}>$58.80</Text>
+          {isTextInputVisible ?
+
+            <TextInput style={[stylesTransactionForm.containerFormInput,
+            { width: '50%', textAlign: 'center', fontSize: 40, fontWeight: '600', color: '#333333' }]} keyboardType='numeric'
+              onChange={(e) => {
+                setAddTransactionForm({ ...addTransactionForm, amount: Number(e.nativeEvent.text) });
+                setTextInputValue(e.nativeEvent.text)
+              }}
+              onBlur={handleBlur}
+            >
+            </TextInput>
+            :
+            <TouchableOpacity onPress={handleToggleTextInput}>
+              <Text style={stylesTransactionForm.containerAmmountInfo}>{textInputValue}</Text>
+            </TouchableOpacity>
+          }
         </View>
         <View style={stylesTransactionForm.containerForm}>
           <View style={{ paddingBottom: 10, }}>
@@ -146,10 +206,10 @@ const TransactionsForm = () => {
             <View style={stylesTransactionForm.containerFormInput} >
               <Picker style={{}}
                 itemStyle={{ height: 50, fontSize: 17, }}
-                selectedValue={addTransactionForm.categorie}
+                selectedValue={addTransactionForm.category}
                 data
                 onValueChange={(itemValue) => {
-                  setAddTransactionForm({ ...addTransactionForm, categorie: itemValue })
+                  setAddTransactionForm({ ...addTransactionForm, category: itemValue })
                 }
                 }>
                 {renderCategoriesPicker()}
@@ -161,13 +221,12 @@ const TransactionsForm = () => {
             <View style={stylesTransactionForm.containerFormInput} >
               <Picker style={{}}
                 itemStyle={{ height: 50, fontSize: 17, }}
-                selectedValue={addTransactionForm.account}
+                selectedValue={addTransactionForm.bank}
                 onValueChange={(itemValue) => {
-                  console.log(itemValue)
-                  setAddTransactionForm({ ...addTransactionForm, account: itemValue })
+                  setAddTransactionForm({ ...addTransactionForm, bank: itemValue })
                 }
                 }>
-                {renderAccountsPicker()}
+                {renderBanksPicker()}
               </Picker>
             </View>
           </View>
