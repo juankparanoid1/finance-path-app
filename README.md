@@ -9,7 +9,7 @@ Creacion de una apliacion de asistencia financiera para la materia Desarrollo y 
 - [Tablero](https://trello.com/b/Oq2imCYP/tablero-finance-path-app)
 - [Mockups](https://www.figma.com/file/tvGvNevpL295iNRVxo7RS9/Untitled?type=design&node-id=0-1&mode=design&t=6TtkPElp9kTamFyb-0)
 - [Documento - Fase 1](https://docs.google.com/document/d/1XoLYGCUKM53vAE7SHPO45GK9WXEkj7LcDowHuZzUvNI/edit)
-- [Manual de Usuario](https://drive.google.com/file/d/1bZkPIXuXqDrMbU4S8XnEkGnR0haY1_fR/view)
+- [Manual de Usuario](https://drive.google.com/file/d/163l7MAAuP_6MCARFrQ6Nowuoz91frDKW/view?usp=sharing)
 - [Manual de Técnico](https://drive.google.com/file/d/1bPxfNjD9ciVsS_4MyY9J7xQvz-gZnMcn/view)
 - [Video de funcionamiento](https://drive.google.com/file/d/1xSANqyT9KcS9UVN-AduzMUNm2XwG3lQT/view?usp=sharing)
 
